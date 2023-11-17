@@ -1,0 +1,140 @@
+@use "../util/functions" as u;
+
+.main {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  column-gap: 1rem;
+  align-items: end;
+
+  @mixin defaultStuff() {
+    background-color: var(--dark-blue);
+    padding: 2.5rem;
+    border-radius: 1rem;
+  }
+
+  &__options-container {
+    @include defaultStuff();
+    border-top-right-radius: 7rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    &__logo {
+      width: 130px;
+      height: 40px;
+    }
+
+    &__options {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      img {
+        height: 47px;
+        width: 47px;
+        padding: 0.8rem;
+        border-radius: 0.5rem;
+        background-color: var(--very-dark-blue);
+      }
+    }
+  }
+
+  &__space-indicator-container {
+    @include defaultStuff();
+    &__info {
+      color: var(--unspecified-color1);
+      margin-bottom: 1rem;
+      font-size: u.rem(14);
+
+      span {
+        color: var(--pale-blue);
+        font-weight: 700;
+      }
+    }
+
+    &__indicator {
+      width: 100%;
+      height: 12px;
+      border-radius: 1rem;
+      margin-bottom: 0.4rem;
+      background-color: var(--unspecified-color2);
+      padding: 0.2rem;
+      box-sizing: content-box;
+      position: relative;
+
+      &__used {
+        background: linear-gradient(to right, var(--orange1), var(--orange2));
+        border-radius: 16px;
+        position: relative;
+        height: 100%;
+
+        &__circle {
+          position: absolute;
+          right: 0.7%;
+          height: 10px;
+          width: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+          background-color: var(--pale-blue);
+          border-radius: 50%;
+        }
+      }
+
+      &__tooltip {
+        background-color: var(--white);
+        padding: 0.7rem 1.7rem;
+        position: absolute;
+        right: 0%;
+        bottom: 70px;
+        color: var(--grayish-blue);
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        border-radius: 0.5rem 0.5rem 0 0.5rem;
+        font-size: u.rem(14);
+        &__number {
+          color: var(--unspecified-color2);
+          font-size: 2.5rem;
+        }
+
+        &::after {
+          content: "";
+          position: absolute;
+          right: 0;
+          top: 100%;
+          height: 0;
+          border-top: 25px solid var(--white);
+          border-left: 25px solid transparent;
+        }
+
+        @media (max-width: 700px) {
+          right: 50%;
+          bottom: unset;
+          top: 55px;
+          border-radius: 0.5rem;
+
+          transform: translateX(50%);
+
+          &::after {
+            display: none;
+          }
+        }
+      }
+    }
+
+    &__limits {
+      display: flex;
+      justify-content: space-between;
+      color: var(--pale-blue);
+      font-weight: 700;
+      font-size: u.rem(14);
+    }
+  }
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+    row-gap: 1rem;
+    align-items: unset;
+  }
+}
